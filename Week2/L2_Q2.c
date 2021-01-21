@@ -1,10 +1,10 @@
 //C-progam to implement singly linked list
-//For performing insertion,deletion, search display
+//For performing insertion,deletion,reverse, linear search display
 
 #include<stdio.h>
 #include<stdlib.h>
 
-//Create a structure of data and link
+//Create a structure of Node
 struct Node
 {
     int data;
@@ -34,9 +34,7 @@ void insertion(int x)
             tmp->data = x;
             //If the initial node is head it is empty list
             if(tmp == NULL)
-            {
                 printf("Empty list\n");
-            }
             
             else
             {	
@@ -61,9 +59,7 @@ void insertion(int x)
 			//Insert on the last node
 			//Address of head is updated
             if(head==NULL)
-            {
                 head=last;
-            }
                   
             else
             {
@@ -74,9 +70,7 @@ void insertion(int x)
 			 //Scan the list and if null is found, add node to that prev node 
 			 //Update link of tmp   
                 while (tmp->next != NULL) 
-                {
                     tmp = tmp->next;
-                }
 
         // Appends the last node with last
             tmp->next = last;
@@ -140,37 +134,39 @@ void search(int x, int n)
                 printf("Element found at location:%d \n",(i+1)); 
                 flag=0; 
             } 
-            else 
-            { 
+            else  
                 flag++; 
-            } 
             i++; 
             tmp = tmp -> next;
         }       
     }
 }
 
+//Function to display status of linked list
 void display() 
 {
+
     struct Node *tmp = (struct Node *)malloc(sizeof(struct Node *));
     if(head == NULL)
-    {
         printf("Empty list");
-    }
     else
     {
+    	//storing  of 1st node into tmp
         tmp = head;
         printf("Linked List: ");
+        //Display of linked list 
         while(tmp != NULL)
         {
             printf("%d->",tmp->data);
             tmp = tmp->next;
         }
+        //Print Link of last node
         if(tmp==NULL)
             printf("NULL");
     }
 }
 
+//Function to reverse linked list element
 void reverse()
 {
     struct Node *prev = NULL;
@@ -179,7 +175,7 @@ void reverse()
     
     while(cur!=NULL)
     {
-        //Store next
+        //Store address of current next into next
         next=cur->next;
 
         //Reverse current node's pointer
@@ -207,11 +203,10 @@ int main()
         scanf("%d",&elem);
         insertion(elem);
         display();
-//    int pos;
- //   scanf("%d",&pos);
+	//    int pos;
+ 	//   scanf("%d",&pos);
     }
         //InsertNth(45,2);
-        //InsertNth(56,3);
         //display();
         int x;
         printf("Enter the element to be search ");
