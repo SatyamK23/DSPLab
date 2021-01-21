@@ -29,7 +29,6 @@ void insertion(int x)
     //If the choice is 1.Insert at front
     if(op==1)
     {
-        //case 1:
         //Insert data into tmp node
             tmp->data = x;
             //If the initial node is head it is empty list
@@ -38,9 +37,9 @@ void insertion(int x)
             
             else
             {	
-            //Insert data into tmp 
-            //copy address of head to link of tmp
-            //Address of head is updated
+            // Insert data into tmp 
+            // copy address of head to link of tmp
+            // Address of head is updated
                 tmp->data=x;
                 tmp->next=head;
                 head=tmp;
@@ -48,31 +47,31 @@ void insertion(int x)
     }
     else if(op==2)
     {
-       //case 2:If the choice is 1.Insert at end
-       //Create a new node as last and allocate memory to last node
+       // case 2:If the choice is 1.Insert at end
+       // Create a new node as last and allocate memory to last node
             struct Node *last = (struct Node *)malloc(sizeof(struct Node *));
             //Insert data into last node and set the link to NULL
             last->data =  x;
             last->next = NULL;
 			
-			//If the list is empty
-			//Insert on the last node
-			//Address of head is updated
+		// If the list is empty
+		// Insert on the last node
+		// Address of head is updated
             if(head==NULL)
                 head=last;
                   
             else
             {
-                //Creates a temp node and sets it to head
+               // Creates a temp node and sets it to head
                struct Node * tmp = (struct Node *)malloc(sizeof(struct Node *));
                tmp = head;
 	
-			 //Scan the list and if null is found, add node to that prev node 
-			 //Update link of tmp   
+			 // Scan the list and if null is found, add node to that prev node 
+			 // Update link of tmp   
                 while (tmp->next != NULL) 
                     tmp = tmp->next;
 
-        // Appends the last node with last
+        	// Appends the last node with last
             tmp->next = last;
             }
     }
@@ -80,7 +79,6 @@ void insertion(int x)
 
 //struct Node *insertatN(in
  
-
 //Deletion at first node, last node
 void deletion()
 {
@@ -88,7 +86,7 @@ void deletion()
     printf("Enter the choice:%t");
     int op;
     scanf("%d",&op);
-    //Create new node as tmp and allocate memory
+    //Create new temporay node and allocate memory
     struct Node *tmp = (struct Node *)malloc(sizeof(struct Node *));
     if(op==1)
     {
@@ -120,6 +118,8 @@ void deletion()
 void search(int x, int n)
 {
     struct Node * tmp;
+    //flag: Used for checking the element found or not
+    //i: Increment the pointer
     int i=0, flag;
     tmp=head;
     if(head==NULL)
@@ -134,11 +134,13 @@ void search(int x, int n)
                 printf("Element found at location:%d \n",(i+1)); 
                 flag=0; 
             } 
-            else  
-                flag++; 
+            else    	
+                flag++;
+                 
             i++; 
             tmp = tmp -> next;
-        }       
+        } 
+         printf("Element not found");      
     }
 }
 
@@ -148,7 +150,7 @@ void display()
 
     struct Node *tmp = (struct Node *)malloc(sizeof(struct Node *));
     if(head == NULL)
-        printf("Empty list");
+        printf("Empty list\n");
     else
     {
     	//storing  of 1st node into tmp
@@ -195,10 +197,14 @@ int main()
     printf("Enter the no of elements");
     int n;
     scanf("%d",&n);
+   
+   	//If no element is inserted, exit main
+   	if(n<=0)
+   		return 0;
 
     for(int i=0;i<n;i++)
     {
-        printf("Enter the element");
+        printf("\nEnter the element");
         int elem;
         scanf("%d",&elem);
         insertion(elem);
@@ -209,9 +215,10 @@ int main()
         //InsertNth(45,2);
         //display();
         int x;
-        printf("Enter the element to be search ");
+        printf("\nEnter the element to be search ");
         scanf("%d",&x);
         search(x,n);
+        printf("\n");
         deletion();
         display();
 		
