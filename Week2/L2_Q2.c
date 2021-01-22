@@ -18,10 +18,13 @@ struct Node *head=NULL;
 //Insertion at first node,last node
 void insertion(int x)
 {
-    printf("1. Insert at front\n,2. Insert at end\n");
+    printf("1. Insert at front\n,2. Insert at end\n3.Insert at Nth position");
     printf("Enter the choice:%t");
     int op;
     scanf("%d",&op);
+
+    //To keep track of node visited
+    int cnt=0;
     
     //Create a new node tmp and allocate memory to tmp
     struct Node *tmp = (struct Node *)malloc(sizeof(struct Node *));
@@ -43,6 +46,7 @@ void insertion(int x)
                 tmp->data=x;
                 tmp->next=head;
                 head=tmp;
+                cnt++;
             }
     }
     else if(op==2)
@@ -73,7 +77,24 @@ void insertion(int x)
 
         	// Appends the last node with last
             tmp->next = last;
+            cnt++;
             }
+    }
+    else if(op==3)
+    {
+        int pos;
+        scanf("%d",&pos);
+        struct Node *tmp = (struct Node *) malloc(sizeof(struct Node *));
+        tmp->data = x;
+        tmp->next = NULL;
+        
+        struct Node *tmp2 = (struct Node *) malloc(sizeof(struct Node *));
+        for(int i=0;i<cnt-1;i++)
+            tmp2 = tmp2->next;
+
+        tmp->next=tmp2->next;
+        tmp2->next = tmp;
+        cnt++;
     }
 }
 
