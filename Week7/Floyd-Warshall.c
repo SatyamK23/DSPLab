@@ -1,17 +1,10 @@
 #include <stdio.h>
 #include <limits.h>
 
-#define V 6
 #define INF INT_MAX
 
-//Function to return min value 
-int min(int a,int b)
-{
-    return (a<b)?a:b;
-}
-
 //Function to print adjacency Matrix
-void printMatrix(int graph[V][V])
+void printMatrix(int V, int (*graph)[V])
 {
         for (int i = 1; i <= V; i++) 
         {
@@ -26,7 +19,7 @@ void printMatrix(int graph[V][V])
         }
 }
 
-void Floyd_Warshall(int graph[V][V])
+void Floyd_Warshall(int V,int (*graph)[V])
 {
     for(int k=1;k<=V;k++)
     {
@@ -44,7 +37,7 @@ void Floyd_Warshall(int graph[V][V])
         }
         //To print the matrix at each iteration
         printf("Iteration %d\n",k);
-        printMatrix(graph);
+        printMatrix(V, graph);
         printf("\n");
     }
 }
@@ -52,9 +45,9 @@ void Floyd_Warshall(int graph[V][V])
 
 int main()
 {
-    int E;
-    printf("Enter the no of edges\n");
-    scanf("%d",&E);
+    int V,E;
+    printf("Enter the no of vertices,edges\n");
+    scanf("%d %d",&V,&E);
 
     int adjM[V][V];
     for(int i=1;i<=V;i++)
@@ -71,17 +64,19 @@ int main()
     int u,v,w;
     for(int i=1;i<=E;i++)
     {
-//        printf("Enter the src,dest,weight");
+	//        printf("Enter the src,dest,weight");
         scanf("%d %d %d",&u,&v,&w);
 
+	//For directed edge set edge from u to v to w
+	//For undirected edge uncomment adjM[v][u]
         adjM[u][v]=w;
-        adjM[v][u]=w;
+       // adjM[v][u]=w;
     }
     printf("Original Distance Matrix\n");
-    printMatrix(adjM);
-    Floyd_Warshall(adjM);
+    printMatrix(V,adjM);
+    Floyd_Warshall(V, adjM);
     printf("Final Distance matrix\n");
-    printMatrix(adjM);
+    printMatrix(V, adjM);
 
     return 0;
 }
